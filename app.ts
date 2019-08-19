@@ -2,17 +2,17 @@ const Koa = require('koa')
 const app = new Koa()
 const views = require('koa-views')
 const json = require('koa-json')
-const onerror = require('koa-onerror')
+const error = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
 const pv=require('./middleware/koa-pv')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-
+const {port}=require('./dbs/config')
 app.use(pv())
 // error handler
-onerror(app)
+error(app)
 
 // middlewares
 app.use(bodyparser({
@@ -28,9 +28,9 @@ app.use(views(__dirname + '/views', {
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
+  const start: any= new Date()
   await next()
-  const ms = new Date() - start
+  const ms = <any>new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
@@ -42,5 +42,9 @@ app.use(users.routes(), users.allowedMethods())
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
+
+app.listen(port,()=>{
+  console.log(`app start at http://localhost:${port}`)
+})
 
 module.exports = app
