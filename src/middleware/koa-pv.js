@@ -1,10 +1,11 @@
 function pv(ctx){
-  global.console.log('pv')
+  global.console.log(ctx.session)
+  ctx.session.count++
 }
 
 module.exports=function(){
   return async function(ctx,next){
-    pv();
+    pv(ctx);
     await next();
   }
 }

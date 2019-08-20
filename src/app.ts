@@ -5,13 +5,20 @@ const json = require('koa-json')
 const error = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
+const session =require('koa-generic-session')
+const Redis=require('koa-redis')
 const pv=require('./middleware/koa-pv')
+require('./util/db')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-app.use(pv())
+
 // error handler
 error(app)
+app.use(session({
+  store:new Redis()
+}))
+app.use(pv())
 
 // middlewares
 app.use(bodyparser({
@@ -19,6 +26,7 @@ app.use(bodyparser({
 }))
 app.use(json())
 app.use(logger())
+app.keys=['keys','keyskeys']
 app.use(require('koa-static')(__dirname + '/public'))
 
 app.use(views(__dirname + '/views', {

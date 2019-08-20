@@ -87,5 +87,4 @@ namespace bin {
     var bind = typeof addr === "string" ? "pipe " + addr : "port " + addr.port;
     debug("Listening on " + bind);
   }
-  global.console.log('test');
 }

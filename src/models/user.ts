@@ -19,4 +19,5 @@ const schema:Schema=new Schema({
     address:String
 });
 
-export const user:Model<UserDocument>=model('User',schema,'user');
+
+export const User:Model<UserDocument>=model('User',schema,'user');
