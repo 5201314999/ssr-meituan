@@ -9,7 +9,6 @@ const pv=require('./middleware/koa-pv')
 
 const index = require('./routes/index')
 const users = require('./routes/users')
-const {port}=require('./dbs/config')
 app.use(pv())
 // error handler
 error(app)
@@ -42,9 +41,5 @@ app.use(users.routes(), users.allowedMethods())
 app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
-
-app.listen(port,()=>{
-  console.log(`app start at http://localhost:${port}`)
-})
 
 module.exports = app

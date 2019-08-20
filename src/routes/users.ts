@@ -19,9 +19,7 @@ router.post('/addPersion',async(ctx,next)=>{
   await user.save()
   ctx.body={
     res:0
-  }
+  } 
 })
 
 module.exports = router
-
-export{}
