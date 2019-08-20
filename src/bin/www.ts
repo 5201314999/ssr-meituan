@@ -7,12 +7,13 @@ namespace bin {
   var app = require("../app");
   var debug = require("debug")("demo:server");
   var http = require("http");
+  const config=require('../common/config')
 
   /**
    * Get port from environment and store in Express.
    */
 
-  var port = normalizePort(process.env.PORT || '3003');
+  const port = normalizePort(process.env.PORT || config.port);
   // app.set('port', port);
 
   /**
@@ -26,7 +27,7 @@ namespace bin {
    */
 
   server.listen(port,()=>{
-    console.log(`listen ${port}`);
+    console.log(`listen http://${config.host}:${port}`);
   });
   server.on("error", onError);
   server.on("listening", onListening);

@@ -1,5 +1,5 @@
 const router = require('koa-router')()
-const User= require('../dbs/models/user')
+const User= require('../models/user')
 
 router.prefix('/users')
 
