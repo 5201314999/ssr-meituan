@@ -16,6 +16,8 @@ const users = require('./routes/users')
 // error handler
 error(app)
 app.use(session({
+  key:'mt',
+  prefix:'pr',
   store:new Redis()
 }))
 app.use(pv())

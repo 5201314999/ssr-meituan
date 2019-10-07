@@ -23,7 +23,6 @@ router.post('/addUser',async(ctx,next)=>{
 })
 
 router.get('/getUser',async(ctx,next)=>{
-  debugger
   const result=await User.findOne({name:ctx.request.query.name});
   const results=await User.find({name:ctx.request.query.name});
   ctx.body={
